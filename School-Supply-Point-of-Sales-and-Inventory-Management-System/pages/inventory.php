@@ -1,0 +1,8 @@
+<?php
+?>
+                    <div class="page-intro"><div><h2>Keep stock up to date</h2><p>Receive new supplies or correct the quantity on hand.</p></div><span class="count-badge"><?php echo count($lowStock); ?> low stock</span></div>
+                    <section class="panel"><div class="panel-heading"><div><h3>Inventory levels</h3><p>Stock changes are saved to your store data.</p></div></div>
+                        <div class="table-wrap"><table><thead><tr><th>PRODUCT</th><th>CURRENT STOCK</th><th>STOCK ACTION</th></tr></thead><tbody>
+                        <?php foreach ($products as $product): ?><tr><td><div class="table-product"><span class="product-mini"><?php echo e(strtoupper(substr($product['name'], 0, 1))); ?></span><div><strong><?php echo e($product['name']); ?></strong><small><?php echo e($product['category']); ?></small></div></div></td><td><span class="stock-pill <?php echo $product['stock'] <= 10 ? 'stock-low' : ''; ?>"><?php echo (int) $product['stock']; ?> units</span></td><td><form method="post" class="stock-form"><input type="hidden" name="csrf" value="<?php echo e($_SESSION['csrf']); ?>"><input type="hidden" name="action" value="adjust_stock"><input type="hidden" name="product_id" value="<?php echo e($product['id']); ?>"><select name="mode" aria-label="Stock action"><option value="add">Add stock</option><option value="set">Set total</option></select><input name="quantity" type="number" min="0" step="1" required placeholder="Qty"><button class="button button-small button-outline" type="submit">Update</button></form></td></tr><?php endforeach; ?>
+                        </tbody></table></div>
+                    </section>

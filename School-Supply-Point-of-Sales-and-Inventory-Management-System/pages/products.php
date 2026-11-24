@@ -1,0 +1,19 @@
+<?php
+?>
+                    <div class="page-intro"><div><h2>Manage your supplies</h2><p>Add products or keep the catalog details up to date.</p></div><div class="product-page-actions"><a class="text-link" href="index.php?page=catalog">View public catalog →</a><span class="count-badge"><?php echo count($products); ?> products</span></div></div>
+                    <section class="panel form-panel"><div class="panel-heading"><div><h3><?php echo $editProduct ? 'Edit product' : 'Add a product'; ?></h3><p><?php echo $editProduct ? 'Update the details below.' : 'Fill in the basics to add a new item.'; ?></p></div></div>
+                        <form method="post" class="product-form"><input type="hidden" name="csrf" value="<?php echo e($_SESSION['csrf']); ?>"><input type="hidden" name="action" value="save_product"><input type="hidden" name="product_id" value="<?php echo e($editProduct ? $editProduct['id'] : ''); ?>">
+                            <label>Product name<input name="name" required value="<?php echo e($editProduct ? $editProduct['name'] : ''); ?>" placeholder="e.g. Yellow pad"></label>
+                            <label>Category<input name="category" required value="<?php echo e($editProduct ? $editProduct['category'] : ''); ?>" placeholder="e.g. Paper Supplies"></label>
+                            <label>Price (₱)<input name="price" type="number" min="0.01" step="0.01" required value="<?php echo e($editProduct ? $editProduct['price'] : ''); ?>" placeholder="0.00"></label>
+                            <label>Starting stock<input name="stock" type="number" min="0" step="1" required value="<?php echo e($editProduct ? $editProduct['stock'] : '0'); ?>"></label>
+                            <label class="form-wide">Description<input name="description" value="<?php echo e($editProduct ? $editProduct['description'] : ''); ?>" placeholder="A short product description (optional)"></label>
+                            <div class="form-actions"><?php if ($editProduct): ?><a class="button button-quiet" href="index.php?page=products">Cancel</a><?php endif; ?><button class="button button-primary" type="submit"><?php echo $editProduct ? 'Save changes' : 'Add product'; ?></button></div>
+                        </form>
+                    </section>
+                    <section class="panel"><div class="panel-heading"><div><h3>Product list</h3><p>Products available in your store</p></div></div>
+                        <div class="table-wrap"><table><thead><tr><th>PRODUCT</th><th>CATEGORY</th><th>PRICE</th><th>IN STOCK</th><th>ACTIONS</th></tr></thead><tbody>
+                        <?php foreach ($products as $product): ?><tr><td><div class="table-product"><span class="product-mini"><?php echo e(strtoupper(substr($product['name'], 0, 1))); ?></span><div><strong><?php echo e($product['name']); ?></strong><small><?php echo e($product['id']); ?></small></div></div></td><td><?php echo e($product['category']); ?></td><td class="amount"><?php echo money($product['price']); ?></td><td><span class="stock-pill <?php echo $product['stock'] <= 10 ? 'stock-low' : ''; ?>"><?php echo (int) $product['stock']; ?> units</span></td><td><div class="row-actions"><a class="action-link" href="index.php?page=products&amp;edit=<?php echo urlencode($product['id']); ?>">Edit</a><form method="post" onsubmit="return confirm('Remove this product?')"><input type="hidden" name="csrf" value="<?php echo e($_SESSION['csrf']); ?>"><input type="hidden" name="action" value="delete_product"><input type="hidden" name="product_id" value="<?php echo e($product['id']); ?>"><button class="action-link danger-link" type="submit">Delete</button></form></div></td></tr><?php endforeach; ?>
+                        <?php if (count($products) === 0): ?><tr><td colspan="5" class="table-empty">No products yet. Add one using the form above.</td></tr><?php endif; ?>
+                        </tbody></table></div>
+                    </section>

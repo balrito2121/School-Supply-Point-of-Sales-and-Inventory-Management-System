@@ -1,0 +1,59 @@
+{
+    "users": [
+        {
+            "username": "admin",
+            "name": "Store Administrator",
+            "role": "admin",
+            "password": "$2y$10$yCiODqKGIOmOTvvuNIhFEO6ey8PG0kky1/ZDIFOlxz4LteyYHIt2a"
+        },
+        {
+            "username": "cashier",
+            "name": "Store Cashier",
+            "role": "cashier",
+            "password": "$2y$10$sMcoJv7F5vgiE95YlZ/gyu/MkOySJkHZB3BQeUd/ItIc3uFg2O8Be"
+        }
+    ],
+    "products": [
+        {
+            "id": "P-1001",
+            "name": "Composition Notebook",
+            "category": "Paper Supplies",
+            "price": 35,
+            "stock": 48,
+            "description": "A ruled notebook for everyday school notes."
+        },
+        {
+            "id": "P-1002",
+            "name": "Blue Ballpen",
+            "category": "Writing Tools",
+            "price": 12,
+            "stock": 85,
+            "description": "Smooth-writing blue ink ballpoint pen."
+        },
+        {
+            "id": "P-1003",
+            "name": "Pencil Set",
+            "category": "Writing Tools",
+            "price": 25,
+            "stock": 32,
+            "description": "A set of two pencils with erasers."
+        },
+        {
+            "id": "P-1004",
+            "name": "Colored Paper",
+            "category": "Art Supplies",
+            "price": 45,
+            "stock": 18,
+            "description": "Assorted colors for school projects."
+        },
+        {
+            "id": "P-1005",
+            "name": "Glue Stick",
+            "category": "Art Supplies",
+            "price": 30,
+            "stock": 7,
+            "description": "Easy-to-use glue stick for paper crafts."
+        }
+    ],
+    "transactions": []
+}
